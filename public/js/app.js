@@ -16,9 +16,11 @@ $(document).ready(function(){
   $('.tooltipped').tooltip();
 
   getConfig();
+
+  $("#btExecTodos").click(function(){
+    execTodos();
+  });
 });
-
-
 
 function trocaAba(tab){
   console.log(tab, tab.id)
@@ -49,7 +51,12 @@ async function getConfig(){
 
   data.then(saida => {
     exibirConfigsTela(JSON.parse(saida));
+    listaBackups(JSON.parse(saida));
   })
+};
+
+async function execTodos(){
+ let data = backupTodos();
 };
 
 function addConfig(){
@@ -115,6 +122,8 @@ function exibirConfigsTela(configs){
 
   configs.map(function(obj){
 
+    let extensoes = obj.extensoes.map(function(a){ return a.replace(".","") })
+
     let novoCard = ` <div class="card blue-grey darken-2 descConfig" id="config_${qtdConfig}">` +
                    `  <div class="card-content white-text">` +
                    `    <div class="row">` +
@@ -131,7 +140,7 @@ function exibirConfigsTela(configs){
                    `      <div class="input-field col s1">` +
                    `        </div>` +
                    `          <div class="input-field col s3">` +
-                   `            <select name="extensoes_${qtdConfig}" multiple>` +
+                   `            <select id="extensoes_${qtdConfig}" name="extensoes_${qtdConfig}" multiple>` +
                    `              <option value="p">.p</option>` +
                    `              <option value="i">.i</option>` +
                    `              <option value="html">.html</option>` +
@@ -146,7 +155,25 @@ function exibirConfigsTela(configs){
                    `</div>` ;
 
     $('#listagemConfigs').append(novoCard);
+    $("#" + `extensoes_${qtdConfig}`).val(extensoes);
     $('select').formSelect();
     qtdConfig++;
+    M.updateTextFields();
   });
 };
+
+function deleteCongif(config){
+  $("#" + config).remove();
+};
+
+function listaBackups(backups){
+
+  backups.map(function(obj){
+
+    let backup = `<li class="collection-item blue-grey lighten-1"><p><b>Diretório: </b> ${obj.dirEntrada} </p><p><b>Último Backup:</b> 28/11/2018 <a style="margin-left: 60%;" class="waves-effect waves-light btn">Executar</a></p></li>`
+
+    $('#lista_backups').append(backup);
+
+  });
+};
+

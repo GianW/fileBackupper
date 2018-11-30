@@ -21,8 +21,19 @@
     </div>
   </nav>
   <div class="row">
-    <!--Menu lateral-->
-    <div id="backup" class="col s12">Test 1</div>
+    <!-- ABA BACKUO -->
+    <div id="backup" class="col s12">
+      <ul class="collection blue-grey" id="lista_backups">
+        <li class="collection-header" style="text-align:center;"><b>Backups configurados</b></li>
+      </ul>
+      <div class="row">
+        <div class="col s9"></div>
+        <div class="col s3">
+          <a class="waves-effect waves-light btn" id="btExecTodos">Executar todos</a>
+        </div>
+      </div>
+    </div>
+    <!-- ABA CONFIG -->
     <div id="config" class="col s12">
       <div id="listagemConfigs">
       </div> <!-- FIM LISTAGEM -->
@@ -44,7 +55,6 @@
           </li>
         </ul>
       </div>
-
   </div>
   <!--JavaScript at end of body for optimized loading-->
   <script src="js/jquery-3.3.1.min.js"></script>

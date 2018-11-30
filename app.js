@@ -1,5 +1,6 @@
 const carlo = require('carlo');
 const config = require('./app/config.js');
+const backup = require('./app/backup.js');
 
 (async () => {
   // Launch the browser.
@@ -18,6 +19,10 @@ const config = require('./app/config.js');
 
   await app.exposeFunction('buscarConfig', _ => {
     return config.get().then(result => result);
+  });
+
+  await app.exposeFunction('backupTodos', _ => {
+    return backup.exec().then(result => result);
   });
 
   // Navigate to the main page of your app.

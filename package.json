@@ -4,11 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "start": "node app"
   },
   "author": "Gian Winckler",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "carlo": "^0.9.28"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
 }
