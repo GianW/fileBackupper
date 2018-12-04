@@ -23,7 +23,8 @@ $(document).ready(function(){
 });
 
 function trocaAba(tab){
-  console.log(tab, tab.id)
+  // console.log(tab, tab.id);
+    getConfig();
 };
 
 async function saveConfig(){
@@ -154,7 +155,7 @@ function exibirConfigsTela(configs){
                    `    </div>` +
                    `</div>` ;
 
-    $('#listagemConfigs').append(novoCard);
+    $('#listagemConfigs').html(novoCard);
     $("#" + `extensoes_${qtdConfig}`).val(extensoes);
     $('select').formSelect();
     qtdConfig++;
@@ -172,7 +173,8 @@ function listaBackups(backups){
 
     let backup = `<li class="collection-item blue-grey lighten-1"><p><b>Diretório: </b> ${obj.dirEntrada} </p><p><b>Último Backup:</b> 28/11/2018 <a style="margin-left: 60%;" class="waves-effect waves-light btn">Executar</a></p></li>`
 
-    $('#lista_backups').append(backup);
+
+    $('#lista_backups').html(backup);
 
   });
 };

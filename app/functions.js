@@ -1,6 +1,7 @@
 'use strict'
 const fs = require('fs');
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 
 exports.writeFile = function(file, content){
     return new Promise ((res, rej) => {
@@ -15,7 +16,11 @@ exports.readFile = function(file){
     return new Promise ((res, rej) => {
         fs.readFile(file, (err, data) => {
           if (err) res(err);
-          res(data.toString());
+          if(data != null){
+            res(data.toString());
+          }else{
+            res('');
+          }
         });
     });
 };
@@ -40,15 +45,36 @@ exports.getDir = function(dir, extensoes){
 
 exports.archCopy = function(orig, dest){
 
-    console.log(fs.existsSync(orig));
-
     if (process.platform == "win32" || process.platform == "win64") {
-        exec('COPY "' + orig + '" "' + dest + '" ');
+        execSync(`COPY "${orig}" "${dest}"`);
         return Promise.resolve('done');
     }else{
-        exec("cp -p '" + orig + "' '" + dest + "'");
+        execSync(`cp -p "${orig}" "${dest}"`);
         return Promise.resolve('done');
     }
+};
+
+exports.archCompare = function(arq1, arq2){
+    return new Promise ((res, rej) => {
+
+        let arquiv1 = fs.statSync(arq1);
+        let arquiv2 = fs.statSync(arq2);
+
+        if(arquiv1.mtime.toString() != arquiv2.mtime.toString()){
+            res('diff');
+        }else{
+            res('equal');
+        }
+    });
+};
+
+exports.makeDir = function(dir){
+    return new Promise ((res, rej) => {
+        fs.mkdir(dir, { recursive: true }, (err) => {
+            if (err) throw err;
+            res('ok');
+        });
+    });
 };
 
 function checkValidDir(dir){
