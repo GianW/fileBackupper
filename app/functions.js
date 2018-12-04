@@ -77,6 +77,12 @@ exports.makeDir = function(dir){
     });
 };
 
+exports.fileExists = function(file){
+    return new Promise ((res, rej) => {
+        res(fs.existsSync(file));
+    });
+};
+
 function checkValidDir(dir){
     return new Promise ((res, rej) => {
 
