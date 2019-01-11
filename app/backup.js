@@ -70,3 +70,8 @@ exports.exec = function(){
     });
 
 };
+
+exports.execSingle = function(dir){
+
+
+};

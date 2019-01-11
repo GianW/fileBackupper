@@ -25,6 +25,10 @@ const backup = require('./app/backup.js');
     return backup.exec().then(result => result);
   });
 
+  await app.exposeFunction('backupSingle', dir => {
+    return backup.execSingle(dir).then(result => result);
+  })
+
   // Navigate to the main page of your app.
   await app.load('public/index.html');
 })();

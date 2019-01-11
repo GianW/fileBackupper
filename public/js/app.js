@@ -58,7 +58,11 @@ async function getConfig(){
 
 async function execTodos(){
  let data = backupTodos();
+
+ data.then(result => console.log(result));
 };
+
+
 
 function addConfig(){
 
