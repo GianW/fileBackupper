@@ -62,3 +62,4 @@ typings/
 
 # local data archive
 app/*.json
+app/data/*.json
